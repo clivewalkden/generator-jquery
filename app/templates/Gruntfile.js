@@ -10,11 +10,19 @@ module.exports = function (grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - ' +
-      '<%%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%%= grunt.template.today("yyyy") %> <%%= pkg.author.name %>;' +
-      ' Licensed <%= props.license %> */\n',
+    banner: '/*!\n' +
+      '* <%= pkg.name %> - for jQuery 1.7+\n' +
+      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+      '*\n' +
+      '* Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (http://clivewalkden.co.uk)\n' +
+      '*\n' +
+      '* @package <%= pkg.description %>\n' +
+      '* @author <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
+      '* @version <%= pkg.version %>\n' +
+      '* @license <%= props.license %>\n' +
+      '* @copyright Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
+      '* @date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '*/\n\n',
     // Task configuration.
     clean: {
       files: ['dist']
@@ -41,7 +49,9 @@ module.exports = function (grunt) {
     qunit: {
       all: {
         options: {
-          urls: ['http://localhost:9000/test/<%%= pkg.name %>.html']
+          urls: ['1.7.0','1.7.1','1.7.2','1.8.0','1.8.1','1.8.2','1.8.3','1.9.0','1.9.1','1.10.0','1.10.1','1.10.2','1.11.0','2.0.0','2.0.1','2.0.2','2.0.3','2.1.0'].map(function(version) {
+            return 'http://localhost:<%= connect.server.options.port %>/test/<%%= pkg.name %>.html?jquery=' + version;
+          })
         }
       }
     },
@@ -85,8 +95,8 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          hostname: '*',
-          port: 9000
+          //hostname: '*',
+          port: 8085
         }
       }
     }

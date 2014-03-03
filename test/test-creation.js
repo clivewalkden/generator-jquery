@@ -40,6 +40,7 @@ describe('jquery generator', function () {
       'github_username': 'octocat',
       'author_name': 'Octo Cat',
       'author_email': 'octo@example.com',
+      'analytics': 'UA-12345678-1',
       'jquery_version': '1.9.1'
     });
 

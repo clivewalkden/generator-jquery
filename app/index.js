@@ -63,6 +63,9 @@ JqueryGenerator.prototype.askFor = function askFor() {
   }, {
     name: 'author_email'
   }, {
+    name: 'analytics',
+    message: 'Google Analytics Code'
+  }, {
     name: 'jquery_version',
     message: 'jQuery Version'
   }];
@@ -116,5 +119,6 @@ JqueryGenerator.prototype.projectfiles = function projectfiles() {
   this.template('_name.jquery.json', this.slugname + '.jquery.json');
   this.template('_package.json', 'package.json');
   this.template('bowerrc', '.bowerrc');
+  this.template('index.html', 'index.html');
   this.copy('CONTRIBUTING.md', 'CONTRIBUTING.md');
 };

@@ -1,23 +1,23 @@
 {
-  "name": "generator-jquery",
+  "name": "generator-jquery-clivewalkden",
   "version": "0.0.8",
-  "description": "A jQuery generator for Yeoman",
+  "description": "A jQuery generator for Yeoman for my own scripts",
   "keywords": [
     "yeoman-generator",
     "scaffold",
     "jquery"
   ],
-  "homepage": "https://github.com/yeoman/generator-jquery",
-  "bugs": "https://github.com/yeoman/generator-jquery/issues",
+  "homepage": "https://github.com/clivewalkden/generator-jquery",
+  "bugs": "https://github.com/clivewalkden/generator-jquery/issues",
   "author": {
-    "name": "Pascal Hartig",
-    "email": "phartig@rdrei.net",
-    "url": "https://github.com/passy"
+    "name": "Clive Walkden",
+    "email": "clivewalkden@gmail.com",
+    "url": "https://github.com/clivewalkden/generator-jquery"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yeoman/generator-jquery.git"
+    "url": "https://github.com/clivewalkden/generator-jquery.git"
   },
   "scripts": {
     "test": "mocha"
