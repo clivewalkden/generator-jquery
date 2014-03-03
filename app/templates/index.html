@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title><%= props.title %> v<%= props.version %> | jQuery Plugin | Clive Walkden</title>
+<meta name="description" content="<%= props.description %>">
+
+<meta name="viewport" content="width=device-width">
+
+<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+
+<link href="http://clivewalkden.co.uk/code/template/css/bootstrap.css" rel="stylesheet">
+<link href="http://clivewalkden.co.uk/code/template/css/main.css" rel="stylesheet">
+<link href="http://clivewalkden.co.uk/code/template/css/prettify.css" rel="stylesheet">
+</head>
+<body>
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+    <header>
+		<div class="container">
+			<div class="row">
+				<div class="span6">
+					<h1><%= props.title %> v<%= props.version %></h1>
+				</div>
+				<div class="span6">
+					<h2>Javascript alert messages made easy.</h2>
+				</div>
+			</div>
+		</div>
+    </header>
+
+    <div class="container">
+		<div class="row">
+			<div class="span12 center">
+				<a href="https://github.com/<%= props.github_username %>/<%= slugname %>" class="btn btn-large btn-inverse" target="_blank">View Project on Github »</a>
+				<a href="https://github.com/<%= props.github_username %>/<%= slugname %>/archive/master.zip" class="btn btn-large">Download <%= props.title %></a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="container">
+		<div class="row">
+			<div class="span12">
+				<img src="https://travis-ci.org/<%= props.github_username %>/<%= slugname %>.png?branch=master">
+				<p><%= props.description %></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h1>Basic Usage</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span12">
+				<p>The code below...</p>
+				<pre class="prettyprint linenums lang-html">&lt;!-- Message --&gt;
+&lt;a href="#" class="alert"&gt;Delete Page&lt;/a&gt;
+
+&lt;script&gt;
+// Finally call the script
+$(function(){
+	$('.alert').<%= slugname %>();
+});
+&lt;/script&gt;</pre>
+			</div>
+			<div class="span12">
+				<p>... produces this</p>
+				<a href="#" class="demo1">Delete Page</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h1>Configuration Options</h1>
+				</div>
+			</div>
+			<div class="span12">
+				<table class="table table-bordered">
+				<tr>
+					<th>Property</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>message</td>
+					<td>string</td>
+					<td><code>Are you sure?</code></td>
+					<td>The message which is displayed in the alert window.</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h1>Other Examples</h1>
+				</div>
+				<p>Below are some more examples of the script.</p>
+			</div>
+		</div>
+
+		
+
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h1>Changelog</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span12">
+				<table class="table table-bordered table-striped">
+				<tr>
+					<td><strong>v<%= props.version %></strong></td>
+					<td><%= props.currentYear %></td>
+					<td>Created the first version of the script based on previous created scripts.</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+<script>window.jQuery || document.write('<script src="bower_components/jquery/jquery.js"><\/script>')</script>
+
+<script src="src/<%= slugname %>.js?v=<%= props.version %>"></script>
+<script src="http://clivewalkden.co.uk/code/template/js/bootstrap.js"></script>
+<script src="http://clivewalkden.co.uk/code/template/js/prettify.js"></script>
+
+<script>
+$(function(){
+	window.prettyPrint && prettyPrint();
+})
+</script>
+
+<script>
+$(function(){
+    $('.demo1').<%= slugname %>();
+});
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<%= props.analytics %>', 'clivewalkden.co.uk');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

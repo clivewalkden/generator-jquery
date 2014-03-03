@@ -13,10 +13,10 @@ In your web page:
 
 ```html
 <script src="jquery.js"></script>
-<script src="dist/<%= slugname %>.min.js"></script>
+<script src="dist/jquery.<%= slugname %>.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  $.<%= slugname %>(); // "<%= slugname %>"
 });
 </script>
 ```

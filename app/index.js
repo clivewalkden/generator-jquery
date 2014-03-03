@@ -63,6 +63,9 @@ JqueryGenerator.prototype.askFor = function askFor() {
   }, {
     name: 'author_email'
   }, {
+    name: 'analytics',
+    message: 'Google Analytics Code'
+  }, {
     name: 'jquery_version',
     message: 'jQuery Version'
   }];
@@ -91,6 +94,11 @@ JqueryGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
+JqueryGenerator.prototype.libs = function libs() {
+  this.mkdir('libs');
+  this.copy('libs/jquery-loader.js', 'libs/jquery-loader.js');
+};
+
 JqueryGenerator.prototype.source = function source() {
   this.mkdir('src');
   this.copy('src/jshintrc', 'src/.jshintrc');
@@ -116,5 +124,6 @@ JqueryGenerator.prototype.projectfiles = function projectfiles() {
   this.template('_name.jquery.json', this.slugname + '.jquery.json');
   this.template('_package.json', 'package.json');
   this.template('bowerrc', '.bowerrc');
+  this.template('index.html', 'index.html');
   this.copy('CONTRIBUTING.md', 'CONTRIBUTING.md');
 };
