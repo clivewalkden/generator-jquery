@@ -1,4 +1,4 @@
-# jQuery Generator [![Build Status](https://secure.travis-ci.org/clivewalkden/generator-jquery-clivewalkden.png?branch=master)](https://travis-ci.org/clivewalkden/generator-jquery-clivewalkden)
+# jQuery Generator [![Build Status](https://secure.travis-ci.org/clivewalkden/generator-jquery.png?branch=master)](https://travis-ci.org/clivewalkden/generator-jquery)
 
 > Create a specific jQuery plugin with [Yeoman][], including QUnit unit tests.
 
