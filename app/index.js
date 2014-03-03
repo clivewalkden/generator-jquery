@@ -94,6 +94,11 @@ JqueryGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
+JqueryGenerator.prototype.libs = function libs() {
+  this.mkdir('libs');
+  this.copy('libs/jquery-loader.js', 'libs/jquery-loader.js');
+};
+
 JqueryGenerator.prototype.source = function source() {
   this.mkdir('src');
   this.copy('src/jshintrc', 'src/.jshintrc');

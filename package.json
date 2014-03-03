@@ -1,6 +1,6 @@
 {
   "name": "generator-jquery-clivewalkden",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A jQuery generator for Yeoman for my own scripts",
   "keywords": [
     "yeoman-generator",
