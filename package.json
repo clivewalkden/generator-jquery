@@ -1,6 +1,6 @@
 {
   "name": "generator-jquery-clivewalkden",
-  "version": "0.0.9",
+  "version": "1.2.2",
   "description": "A jQuery generator for Yeoman for my own scripts",
   "keywords": [
     "yeoman-generator",
@@ -20,28 +20,23 @@
     "url": "https://github.com/clivewalkden/generator-jquery.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 20000"
   },
   "dependencies": {
-    "compare-version": "~0.1.0",
-    "yeoman-generator": "~0.16.0"
+    "compare-version": "^0.1.2",
+    "is-online": "^3.1.0",
+    "multiline": "^1.0.1",
+    "pkg-name": "^1.0.0",
+    "yeoman-generator": "^0.18.9"
   },
   "devDependencies": {
     "mocha": "*"
   },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
-  },
   "engines": {
-    "node": ">=0.10.0",
-    "npm": ">=1.2.10"
+    "node": ">=0.10.0"
   },
   "files": [
     "app"
   ],
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "license": "MIT"
 }

@@ -1,14 +1,14 @@
-/*global describe, beforeEach, it*/
+/*global describe, beforeEach, it */
 'use strict';
 var path = require('path');
 var helpers = require('yeoman-generator').test;
-
 
 describe('jquery generator', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
-        return done(err);
+        done(err);
+        return;
       }
 
       this.app = helpers.createGenerator('jquery:app', [
@@ -23,10 +23,7 @@ describe('jquery generator', function () {
     var expected = [
       '.jshintrc',
       '.editorconfig',
-      '.bowerrc',
-      ['package.json', /"name": "myplugin"/],
-      'bower.json',
-      'myplugin.jquery.json'
+      'bower.json'
     ];
 
     helpers.mockPrompt(this.app, {
@@ -44,8 +41,9 @@ describe('jquery generator', function () {
       'jquery_version': '1.9.1'
     });
 
-    this.app.run({}, function () {
-      helpers.assertFiles(expected);
+    this.app.run(function () {
+      helpers.assertFile(expected);
+      helpers.assertFileContent('package.json', /"name": "myplugin"/);
       done();
     });
   });
