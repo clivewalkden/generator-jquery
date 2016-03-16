@@ -1,129 +1,159 @@
 'use strict';
-var util = require('util');
-var path = require('path');
 var compareVersion = require('compare-version');
 var yeoman = require('yeoman-generator');
+var isOnline = require('is-online');
+var pkgName = require('pkg-name');
 
+module.exports = yeoman.generators.Base.extend({
+  initializing: function () {
+    this.pkg = require('../package.json');
+    this.compareVersion = compareVersion;
+  },
 
-var JqueryGenerator = module.exports = function JqueryGenerator(args, options) {
-  yeoman.generators.Base.apply(this, arguments);
+  promptingName: function () {
+    var cb = this.async();
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
+    var prompts = [{
+      name: 'name',
+      message: 'Project Name',
+      default: this.appname,
+    }, {
+      type: 'confirm',
+      name: 'pkgName',
+      message: 'The name above already exists on npm or Bower, choose another?',
+      default: true,
+      when: function (answers) {
+        var done = this.async();
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-  this.compareVersion = compareVersion;
-};
+        isOnline(function (error, online) {
+          if (!online) {
+            done(false);
+            return;
+          }
 
-util.inherits(JqueryGenerator, yeoman.generators.NamedBase);
+          pkgName(answers.name, function (err, available) {
+            if (!available.npm || !available.bower) {
+              done(true);
+            }
 
-JqueryGenerator.prototype.askFor = function askFor() {
-  var cb = this.async();
+            done(false);
+          });
+        });
+      }
+    }];
 
-  // welcome message
-  var welcome = this.yeoman +
-  '_Project Name_ should not contain "jquery" or "js" and ' +
-  'should be a unique ID not already in use at plugins.jquery.com. _Project ' +
-  'title_ should be a human-readable title, and doesn\'t need to contain ' +
-  'the word "jQuery", although it may. For example, a plugin titled "Awesome ' +
-  'Plugin" might have the name "awesome-plugin".' +
-  '\n\n' +
-  'For more information, please see the following documentation:' +
-  '\n\n' +
-  'Naming Your Plugin      http://plugins.jquery.com/docs/names/\n' +
-  'Publishing Your Plugin  http://plugins.jquery.com/docs/publish/\n' +
-  'Package Manifest        http://plugins.jquery.com/docs/package-manifest/\n';
+    this.prompt(prompts, function (props) {
+      if (props.pkgName) {
+        return this.promptingName();
+      }
 
-  console.log(welcome);
+      // For easier access in the templates.
+      this.slugname = this._.slugify(props.name);
+      this.camelname = this._.camelize(props.name);
 
-  var prompts = [{
-    name: 'name',
-    message: 'Project Name',
-    default: this.appname
-  }, {
-    name: 'title',
-    default: 'Awesome jQuery plugin'
-  }, {
-    name: 'description',
-    default: 'The best jQuery plugin ever.'
-  }, {
-    name: 'version'
-  }, {
-    name: 'repository'
-  }, {
-    name: 'bugs'
-  }, {
-    name: 'license',
-    default: 'MIT'
-  }, {
-    name: 'github_username',
-  }, {
-    name: 'author_name'
-  }, {
-    name: 'author_email'
-  }, {
-    name: 'analytics',
-    message: 'Google Analytics Code'
-  }, {
-    name: 'jquery_version',
-    message: 'jQuery Version'
-  }];
+      cb();
+    }.bind(this));
+  },
 
-  var nameToMessage = function (name) {
-    return name.split('_').map(
-      function (x) { return this._.capitalize(x); }.bind(this)
-    ).join(' ') + ':';
-  }.bind(this);
+  prompting: function () {
+    var cb = this.async();
 
-  // Generate prompt messages if only the name is defined.
-  prompts.map(function (entry) {
-    if (entry.message === undefined) {
-      entry.message = nameToMessage(entry.name);
-    }
-    return entry;
-  }.bind(this));
+    var prompts = [{
+      name: 'title',
+      default: 'Awesome jQuery plugin'
+    }, {
+      name: 'description',
+      default: 'The best jQuery plugin ever.'
+    }, {
+      name: 'version'
+    }, {
+      name: 'repository'
+    }, {
+      name: 'license',
+      default: 'MIT'
+    }, {
+      name: 'github_username',
+      store: true
+    }, {
+      name: 'author_name',
+      store: true
+    }, {
+      name: 'author_email',
+      store: true
+    }, {
+      name: 'jquery_version',
+      message: 'jQuery Version'
+    }, {
+      type: 'list',
+      name: 'kind',
+      message: 'What kind of jQuery plugin would you like to create?',
+      choices: [{
+        name: 'Collection method',
+        value: 'collection_method'
+      }, {
+        name: 'Static method',
+        value: 'static_method'
+      }, {
+        name: 'Custom selector',
+        value: 'custom_selector'
+      }]
+    }];
 
-  this.currentYear = (new Date()).getFullYear();
+    var nameToMessage = function (name) {
+      return name.split('_').map(
+        function (x) {
+          return this._.capitalize(x);
+        }.bind(this)
+      ).join(' ') + ':';
+    }.bind(this);
 
-  this.prompt(prompts, function (props) {
-    this.props = props;
-    // For easier access in the templates.
-    this.slugname = this._.slugify(props.name);
-    cb();
-  }.bind(this));
-};
+    // Generate prompt messages if only the name is defined.
+    prompts.map(function (entry) {
+      if (entry.message === undefined) {
+        entry.message = nameToMessage(entry.name);
+      }
+      return entry;
+    }.bind(this));
 
-JqueryGenerator.prototype.libs = function libs() {
-  this.mkdir('libs');
-  this.copy('libs/jquery-loader.js', 'libs/jquery-loader.js');
-};
+    this.currentYear = (new Date()).getFullYear();
 
-JqueryGenerator.prototype.source = function source() {
-  this.mkdir('src');
-  this.copy('src/jshintrc', 'src/.jshintrc');
-  this.template('src/name.js', 'src/' + this.slugname + '.js');
-};
+    this.prompt(prompts, function (props) {
+      this.props = props;
+      cb();
+    }.bind(this));
+  },
 
-JqueryGenerator.prototype.test = function test() {
-  this.mkdir('test');
-  this.copy('test/jshintrc', 'test/.jshintrc');
-  this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
-  this.template('test/name.html', 'test/' + this.slugname + '.html');
-};
+  configuration: function () {
+    this.copy('editorconfig', '.editorconfig');
+    this.copy('jshintrc', '.jshintrc');
+    this.copy('gitignore', '.gitignore');
+    this.copy('travis.yml', '.travis.yml');
+    this.template('_package.json', 'package.json');
+    this.template('bower.json', 'bower.json');
+  },
 
-JqueryGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
-  this.copy('gitignore', '.gitignore');
-  this.copy('travis.yml', '.travis.yml');
+  source: function () {
+    this.mkdir('src');
+    this.copy('src/jshintrc', 'src/.jshintrc');
+    this.template('src/name.js', 'src/' + this.slugname + '.js');
+  },
 
-  this.template('README.md');
-  this.template('Gruntfile.js');
-  this.template('_bower.json', 'bower.json');
-  this.template('_name.jquery.json', this.slugname + '.jquery.json');
-  this.template('_package.json', 'package.json');
-  this.template('bowerrc', '.bowerrc');
-  this.template('index.html', 'index.html');
-  this.copy('CONTRIBUTING.md', 'CONTRIBUTING.md');
-};
+  test: function () {
+    this.mkdir('test');
+    this.copy('test/jshintrc', 'test/.jshintrc');
+    this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
+    this.template('test/name.html', 'test/' + this.slugname + '.html');
+  },
+
+  writing: function () {
+    this.template('readme.md');
+    this.template('Gruntfile.js');
+    this.copy('contributing.md', 'contributing.md');
+  },
+
+  install: function () {
+    this.installDependencies({
+      skipInstall: this.options['skip-install']
+    });
+  }
+});

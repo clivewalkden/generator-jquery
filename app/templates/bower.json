@@ -1,0 +1,34 @@
+{
+  "name": "<%= slugname %>",
+  "version": "<%= props.version %>",
+  "homepage": "<%= props.github_username %>/<%= slugname %>",
+  "authors": [
+    "<%= props.author_name %> <%= props.author_email %>"
+  ],
+  "description": "<%= props.title %>",
+  "main": "dist/jquery.<%= pkg.name %>.min.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    "test",
+    "libs",
+    "**/*.txt",
+    ".editorconfig",
+    ".travis.yml",
+    ".bowerrc",
+    ".jshintrc",
+    ".gitignore",
+    "index.html",
+    "test.html",
+    "CONTRIBUTING.md",
+    "Gruntfile.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "qunit": "~1.12.0",
+    "jquery": "<%= props.jquery_version ? '~' + props.jquery_version : 'latest' %>"
+  }
+}

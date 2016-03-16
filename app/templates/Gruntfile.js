@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = function (grunt) {
   // Load all grunt tasks
   require('load-grunt-tasks')(grunt);
@@ -19,7 +18,7 @@ module.exports = function (grunt) {
       '* @package <%%= pkg.description %>\n' +
       '* @author <%%= pkg.author.name %> (<%%= pkg.author.url %>)\n' +
       '* @version <%%= pkg.version %>\n' +
-      '* @license <%%= props.license %>\n' +
+      '* @license <%%= pkg.license %>\n' +
       '* @copyright Copyright (c) <%%= grunt.template.today("yyyy") %> <%%= pkg.author.name %> (<%%= pkg.author.url %>)\n' +
       '* @date: <%%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '*/\n\n',
