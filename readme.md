@@ -1,4 +1,4 @@
-# generator-jquery [![Build Status](https://travis-ci.org/clivewalkden/generator-jquery.svg?branch=master)](https://travis-ci.org/clivewalkden/generator-jquery)
+# generator-jquery [![Build Status](https://travis-ci.org/clivewalkden/generator-jquery.svg?branch=master)](https://travis-ci.org/clivewalkden/generator-jquery) [![Greenkeeper badge](https://badges.greenkeeper.io/clivewalkden/generator-jquery.svg)](https://greenkeeper.io/)
 
 > Create a specific jQuery plugin with [Yeoman][], including QUnit unit tests.
 
