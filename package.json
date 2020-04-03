@@ -20,14 +20,17 @@
     "url": "https://github.com/clivewalkden/generator-jquery.git"
   },
   "scripts": {
-    "test": "mocha --timeout 20000"
+    "test": "mocha --timeout 20000",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "compare-version": "^0.1.2",
     "is-online": "^3.1.0",
     "multiline": "^1.0.1",
     "pkg-name": "^1.0.0",
-    "yeoman-generator": "^0.18.9"
+    "yeoman-generator": "^0.24.1",
+    "snyk": "^1.305.0"
   },
   "devDependencies": {
     "mocha": "*"
@@ -38,5 +41,6 @@
   "files": [
     "app"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
