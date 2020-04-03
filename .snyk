@@ -3,10 +3,6 @@ version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
-  'npm:minimatch:20160620':
-    - yeoman-generator > file-utils > minimatch:
-        patched: '2020-04-03T13:23:28.417Z'
-    - yeoman-generator > file-utils > glob > minimatch:
-        patched: '2020-04-03T13:23:28.417Z'
-    - yeoman-generator > file-utils > findup-sync > glob > minimatch:
-        patched: '2020-04-03T13:23:28.417Z'
+  'npm:lodash:20180130':
+    - yeoman-generator > html-wiring > cheerio > lodash:
+        patched: '2020-04-03T13:24:05.673Z'

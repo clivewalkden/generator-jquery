@@ -29,7 +29,7 @@
     "is-online": "^3.1.0",
     "multiline": "^1.0.1",
     "pkg-name": "^1.0.0",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-generator": "^2.0.5",
     "snyk": "^1.305.0"
   },
   "devDependencies": {
